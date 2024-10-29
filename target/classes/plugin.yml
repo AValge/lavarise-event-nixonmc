@@ -1,0 +1,12 @@
+name: LavariseEvent
+version: '1.0.0'
+main: se.avalge.lavariseEvent.lavariseEvent.LavariseEvent
+api-version: '1.21'
+authors: [ AValge ]
+description: The official Lavarise event plugin for NixonMC
+load: POSTWORLD
+softdepend:
+  - Multiverse-Core
+commands:
+  lavarisingmenu:
+    permission: lavarise.menu

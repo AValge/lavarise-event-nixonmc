@@ -1,0 +1,74 @@
+# Lavaisrising Location Coordinates
+
+Locations:
+    '1':
+      World: lavarising # Savanne 1
+      x: 181
+      y: 65
+      z: 3596
+      yaw: 0.0
+      pitch: 0.0
+
+    '2':
+      World: lavarising # Savanne 2
+      x: -361
+      y: 71
+      z: 991
+      yaw: 0.0
+      pitch: 0.0
+
+    '3':
+      World: lavarising # Oak Forest 1
+      x: -692
+      y: 64
+      z: -363
+      yaw: 0.0
+      pitch: 0.0
+
+    '4':
+      World: lavarising # Oak Forest 2
+      x: -354
+      y: 76
+      z: 3291
+      yaw: 0.0
+      pitch: 0.0
+
+    '5':
+      World: lavarising # Wooded Badlands
+      x: 341
+      y: 117
+      z: 3049
+      yaw: 0.0
+      pitch: 0.0
+
+    '6':
+      World: lavarising # Jungle
+      x: -597
+      y: 68
+      z: 3091
+      yaw: 0.0
+      pitch: 0.0
+
+    '7':
+      World: lavarising # Mangrove
+      x: -328
+      y: 76
+      z: 2694
+      yaw: 0.0
+      pitch: 0.0
+
+    '8':
+      World: lavarising # Birch
+      x: -439
+      y: 72
+      z: 10
+      yaw: 0.0
+      pitch: 0.0
+
+    '9':
+      World: lavarising # Dark Oak
+      x: -1544
+      y: 67
+      z: 100
+      yaw: 0.0
+      pitch: 0.0
