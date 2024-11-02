@@ -32,10 +32,10 @@ public class Game {
         lava = new Lava(plugin, this);
         ending = new Ending(plugin, this);
         forceStop = new ForceStop(plugin, this);
-        gameBorder = new GameBorder(plugin, this);
+        gameBorder = new GameBorder();
         scoreboardSidebar = new ScoreboardSidebar(plugin, this);
         gameEvents = new GameEvents(plugin, this);
-        shrinkBorder = new ShrinkBorder(plugin, this);
+        shrinkBorder = new ShrinkBorder(plugin);
     }
 
     // Run startGame method to start the game
@@ -82,24 +82,12 @@ public class Game {
         return starting;
     }
 
-    public PreGrace getPreGrace() {
-        return preGrace;
-    }
-
     public Grace getGrace() {
         return grace;
     }
 
     public Lava getLava() {
         return lava;
-    }
-
-    public Ending getEnding() {
-        return ending;
-    }
-
-    public ForceStop getForceStop() {
-        return forceStop;
     }
 
     public GameBorder getGameBorder() {

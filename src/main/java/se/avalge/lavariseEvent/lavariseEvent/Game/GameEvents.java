@@ -148,12 +148,6 @@ public class GameEvents implements Listener {
                 game.getStarting().getAlivePlayers().remove(player);
                 checkWinnerOnLeave();
             }
-            if (game.getGameStateManager().isInState(GameState.FORCESTOP)) {
-
-            }
-            if (game.getGameStateManager().isInState(GameState.LOBBY)) {
-
-            }
         }
     }
 

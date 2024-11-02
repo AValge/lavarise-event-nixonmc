@@ -1,19 +1,19 @@
 package se.avalge.lavariseEvent.lavariseEvent.Map;
 
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import se.avalge.lavariseEvent.lavariseEvent.Game.Game;
 
 public class ShrinkBorder {
 
     private final JavaPlugin plugin;
-    private final Game game;
 
-    public ShrinkBorder(JavaPlugin plugin, Game game) {
+    public ShrinkBorder(JavaPlugin plugin) {
         this.plugin = plugin;
-        this.game = game;
     }
 
     public void shrinkWorldborderTask() {
@@ -21,9 +21,7 @@ public class ShrinkBorder {
             onlinePlayers.sendMessage(ChatColor.RED + "Worldborder will now start to shrink. Watch out!");
         }
 
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            shrinkWorldborder(3, 200);
-        }, 30L);
+        Bukkit.getScheduler().runTaskLater(plugin, () -> shrinkWorldborder(3, 200), 30L);
     }
 
     public void shrinkWorldborder(int size, int duration) {

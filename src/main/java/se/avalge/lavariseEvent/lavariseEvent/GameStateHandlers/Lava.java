@@ -16,15 +16,15 @@ public class Lava {
     private final LavariseEvent plugin;
     private BukkitTask lavaFillTask;
     private int currentLavaY;
-    private final int bottomY = -63; // Define bottom as bedrock level
     private final int topY = 309;  // Define top as 300
-    private final long lavaRiseInterval = 3L; // Interval for lava rising (in seconds)
     private BossBar intervalBossBar;
     private BukkitTask lavaRiseTask;
     private final Game game;
 
     public Lava(LavariseEvent plugin, Game game) {
         this.plugin = plugin;
+        // Define bottom as bedrock level
+        int bottomY = -63;
         this.currentLavaY = bottomY;
         this.game = game;
     }
@@ -36,6 +36,8 @@ public class Lava {
         startRising();
     }
 
+    // Default value, this is the y-level the lava starts rising from
+    // Define bottom as bedrock level
     public void resetCurrentLavaY() {
         this.currentLavaY = -63;
     }
@@ -52,6 +54,8 @@ public class Lava {
     public void startRising() {
         game.getLava().resetCurrentLavaY();
 
+        // Interval for lava rising (in seconds)
+        long lavaRiseInterval = 3L;
         this.lavaFillTask = plugin.getServer().getScheduler().runTaskTimer(
                 plugin,
                 () -> {
