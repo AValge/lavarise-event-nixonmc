@@ -33,7 +33,7 @@ public class GameBorder {
 
         if (world != null) {
             org.bukkit.WorldBorder worldBorder = world.getWorldBorder();
-            worldBorder.setSize(10000);  // Reset the border size
+            worldBorder.setSize(10000);
         } else {
             Bukkit.getLogger().severe("World is null for the provided location!");
         }

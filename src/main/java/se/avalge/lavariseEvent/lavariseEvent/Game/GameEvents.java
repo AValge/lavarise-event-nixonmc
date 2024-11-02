@@ -1,8 +1,6 @@
 package se.avalge.lavariseEvent.lavariseEvent.Game;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -110,7 +108,7 @@ public class GameEvents implements Listener {
             player.setGameMode(GameMode.ADVENTURE);
 
         } else if (currentState == GameState.PRE_GRACE || currentState == GameState.GRACE || currentState == GameState.LAVA) {
-            player.setPlayerListName(ChatColor.GRAY + player.getName());
+            player.setPlayerListName(ChatColor.RED + player.getName());
             player.setGameMode(GameMode.ADVENTURE);
             player.sendMessage(ChatColor.RED + "Game ongoing, wait until game is finished. Thank you for your patience!");
             player.teleport(Locations.NIXON_EVENT_SPAWN);

@@ -4,6 +4,7 @@ import se.avalge.lavariseEvent.lavariseEvent.GameStateHandlers.*;
 import se.avalge.lavariseEvent.lavariseEvent.LavariseEvent;
 import se.avalge.lavariseEvent.lavariseEvent.Map.GameBorder;
 import se.avalge.lavariseEvent.lavariseEvent.Map.MapManager;
+import se.avalge.lavariseEvent.lavariseEvent.Map.ShrinkBorder;
 import se.avalge.lavariseEvent.lavariseEvent.Utils.GameState;
 
 public class Game {
@@ -20,6 +21,7 @@ public class Game {
     private final GameBorder gameBorder;
     private final ScoreboardSidebar scoreboardSidebar;
     private final GameEvents gameEvents;
+    private final ShrinkBorder shrinkBorder;
 
     public Game(LavariseEvent plugin, MapManager mapManager) {
         this.mapManager = mapManager;
@@ -33,6 +35,7 @@ public class Game {
         gameBorder = new GameBorder(plugin, this);
         scoreboardSidebar = new ScoreboardSidebar(plugin, this);
         gameEvents = new GameEvents(plugin, this);
+        shrinkBorder = new ShrinkBorder(plugin, this);
     }
 
     // Run startGame method to start the game
@@ -113,5 +116,9 @@ public class Game {
 
     public GameEvents getGameEvents() {
         return gameEvents;
+    }
+
+    public ShrinkBorder getShrinkBorder() {
+        return shrinkBorder;
     }
 }

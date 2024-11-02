@@ -3,6 +3,7 @@ se\avalge\lavariseEvent\lavariseEvent\Utils\GameState.class
 se\avalge\lavariseEvent\lavariseEvent\Commands\MenuCommand.class
 se\avalge\lavariseEvent\lavariseEvent\GameStateHandlers\Ending.class
 se\avalge\lavariseEvent\lavariseEvent\GameStateHandlers\Starting$1.class
+se\avalge\lavariseEvent\lavariseEvent\Map\ShrinkBorder$1.class
 se\avalge\lavariseEvent\lavariseEvent\GameStateHandlers\ForceStop.class
 se\avalge\lavariseEvent\lavariseEvent\Utils\Locations.class
 se\avalge\lavariseEvent\lavariseEvent\Game\GameStateManager.class
@@ -24,5 +25,6 @@ se\avalge\lavariseEvent\lavariseEvent\GameStateHandlers\Grace.class
 se\avalge\lavariseEvent\lavariseEvent\Map\MapManager.class
 se\avalge\lavariseEvent\lavariseEvent\GameStateHandlers\PreGrace$2.class
 se\avalge\lavariseEvent\lavariseEvent\Map\GameBorder.class
+se\avalge\lavariseEvent\lavariseEvent\Map\ShrinkBorder.class
 se\avalge\lavariseEvent\lavariseEvent\GameStateHandlers\Starting$3.class
 se\avalge\lavariseEvent\lavariseEvent\Handlers\CommandHandler.class

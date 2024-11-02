@@ -17,7 +17,7 @@ public class Lava {
     private BukkitTask lavaFillTask;
     private int currentLavaY;
     private final int bottomY = -63; // Define bottom as bedrock level
-    private final int topY = 310;  // Define top as 300
+    private final int topY = 309;  // Define top as 300
     private final long lavaRiseInterval = 3L; // Interval for lava rising (in seconds)
     private BossBar intervalBossBar;
     private BukkitTask lavaRiseTask;
@@ -57,6 +57,7 @@ public class Lava {
                 () -> {
                     if (currentLavaY > topY) {
                         stopLavaRising();
+                        game.getShrinkBorder().shrinkWorldborderTask();
                         return;
                     }
 
