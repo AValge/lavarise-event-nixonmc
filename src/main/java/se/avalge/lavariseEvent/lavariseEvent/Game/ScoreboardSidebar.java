@@ -101,12 +101,15 @@ public class ScoreboardSidebar implements Listener {
 
         objective.setDisplayName(ChatColor.YELLOW + ChatColor.BOLD.toString() + "< Lavarising >");
 
-        objective.getScore(" ").setScore(5);
-        objective.getScore(ChatColor.RED + "PvP Enables in: ").setScore(4);
-        objective.getScore(ChatColor.YELLOW + getPvPTimeFormatted()).setScore(3);
-        objective.getScore("  ").setScore(2);
-        objective.getScore(ChatColor.RED + "Lava Position:").setScore(1);
-        objective.getScore(ChatColor.YELLOW + "Y: " + game.getLava().getCurrentLavaY() + " / 310").setScore(0);
+        objective.getScore(" ").setScore(8);
+        objective.getScore(ChatColor.RED + "PvP Enables in: ").setScore(7);
+        objective.getScore(ChatColor.YELLOW + getPvPTimeFormatted()).setScore(6);
+        objective.getScore("  ").setScore(5);
+        objective.getScore(ChatColor.RED + "Lava Position:").setScore(4);
+        objective.getScore(ChatColor.YELLOW + "Y: " + game.getLava().getCurrentLavaY() + " / 310").setScore(3);
+        objective.getScore("   ").setScore(2);
+        objective.getScore(ChatColor.RED + "Teaming is not").setScore(1);
+        objective.getScore(ChatColor.RED + "allowed!").setScore(0);
     }
 
     private void resetScoreboard(Player player) {
