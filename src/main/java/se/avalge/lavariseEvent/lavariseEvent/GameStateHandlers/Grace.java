@@ -2,6 +2,7 @@ package se.avalge.lavariseEvent.lavariseEvent.GameStateHandlers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -76,9 +77,14 @@ public class Grace implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+
         if (game.getGameStateManager().isInState(GameState.GRACE) &&
                 player.getWorld().getName().equals("lavarising")) {
-            countdownBossBar.addPlayer(player);
+            if (countdownBossBar != null) {
+                countdownBossBar.addPlayer(player);
+            } else {
+                plugin.getLogger().info("Could not find bossbar. Plugin did not add player. (This is not a bug!)");
+            }
         }
     }
 

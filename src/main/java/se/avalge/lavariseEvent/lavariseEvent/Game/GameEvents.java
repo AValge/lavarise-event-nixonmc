@@ -1,6 +1,7 @@
 package se.avalge.lavariseEvent.lavariseEvent.Game;
 
 import org.bukkit.*;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -59,6 +60,7 @@ public class GameEvents implements Listener {
         }, 20L);
     }
 
+    // Disables movement at the start of the game
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         String worldName = event.getPlayer().getWorld().getName();
@@ -76,6 +78,7 @@ public class GameEvents implements Listener {
         }
     }
 
+    // Disables PvP while graceperiod is active
     @EventHandler
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
         String worldName = event.getEntity().getWorld().getName();
@@ -89,7 +92,7 @@ public class GameEvents implements Listener {
         }
     }
 
-    // Handles what happens when player join during different gamestates
+    // Decides what happens when player join during different gamestates
     @EventHandler
     public void onPlayerLavaGameJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
@@ -101,29 +104,75 @@ public class GameEvents implements Listener {
 
         GameState currentState = game.getGameStateManager().getCurrentState();
 
+            // STARTING
         if (currentState == GameState.STARTING) {
             game.getStarting().getAlivePlayers().add(player);
             player.setPlayerListName(ChatColor.GREEN + player.getName());
             player.teleport(Locations.LAVA_RISING_LOBBY);
-            player.setGameMode(GameMode.ADVENTURE);
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                player.setGameMode(GameMode.ADVENTURE);
+            }, 1L);
 
-        } else if (currentState == GameState.PRE_GRACE || currentState == GameState.GRACE || currentState == GameState.LAVA) {
-            Location loc = game.getStarting().getOngoingGamelocation().get(0);
+            // PREGRACE
+        } else if (currentState == GameState.PRE_GRACE) {
+            Location ongoingLocation = game.getStarting().getOngoingGamelocation().get(0);
+
+            Location highestBlockLocation = ongoingLocation.getWorld().getHighestBlockAt(ongoingLocation).getLocation().add(0, 1, 0);
 
             player.setPlayerListName(ChatColor.RED + player.getName());
-            player.setGameMode(GameMode.SPECTATOR);
-            player.sendMessage(ChatColor.RED + "Game ongoing, wait until game is finished. Thank you for your patience!");
-            player.teleport(loc);
+            player.sendMessage(ChatColor.RED + "Game ongoing. Wait until the game is finished!");
+            player.teleport(highestBlockLocation);
 
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                player.setGameMode(GameMode.SPECTATOR);
+            }, 1L);
+        }
+
+            // GRACE
+        else if (currentState == GameState.GRACE) {
+            Location ongoingLocation = game.getStarting().getOngoingGamelocation().get(0);
+
+            Location highestBlockLocation = ongoingLocation.getWorld().getHighestBlockAt(ongoingLocation).getLocation().add(0, 1, 0);
+
+            player.setPlayerListName(ChatColor.RED + player.getName());
+            player.sendMessage(ChatColor.RED + "Game ongoing. Wait until the game is finished!");
+            player.teleport(highestBlockLocation);
+
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                player.setGameMode(GameMode.SPECTATOR);
+            }, 1L);
+
+            addPlayerToBossBar(game.getGrace().getCountdownBossBar(), player);
+
+            // LAVA
+        } else if (currentState == GameState.LAVA) {
+
+            Location ongoingLocation = game.getStarting().getOngoingGamelocation().get(0);
+
+            Location highestBlockLocation = ongoingLocation.getWorld().getHighestBlockAt(ongoingLocation).getLocation().add(0, 1, 0);
+
+            player.setPlayerListName(ChatColor.RED + player.getName());
+            player.sendMessage(ChatColor.RED + "Game ongoing. Wait until the game is finished!");
+            player.teleport(highestBlockLocation);
+
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                player.setGameMode(GameMode.SPECTATOR);
+            }, 1L);
+
+            addPlayerToBossBar(game.getLava().getIntervalBossBar(), player);
+
+        // ENDING && FORCESTOP && LOBBY
         } else if (currentState == GameState.ENDING || currentState == GameState.FORCESTOP || currentState == GameState.LOBBY) {
             player.teleport(Locations.LAVA_EVENT_SPAWN);
             player.getInventory().clear();
             player.setPlayerListName(ChatColor.GRAY + player.getName());
-            player.setGameMode(GameMode.ADVENTURE);
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                player.setGameMode(GameMode.ADVENTURE);
+            }, 1L);
         }
     }
 
-    // Handles what happens when player quits during different gamestates
+    // Decides what happens when player quits during different gamestates
     @EventHandler
     public void onPlayerLavaGameQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
@@ -159,5 +208,13 @@ public class GameEvents implements Listener {
                 game.endGame();
             }
         }, 20L);
+    }
+
+    private void addPlayerToBossBar(BossBar bossBar, Player player) {
+        if (bossBar != null) {
+            bossBar.addPlayer(player);
+        } else {
+            plugin.getLogger().info("Could not find a bossbar. Plugin did not add player (This is not a bug!§)");
+        }
     }
 }

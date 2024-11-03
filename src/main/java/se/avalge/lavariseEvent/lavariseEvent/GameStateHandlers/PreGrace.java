@@ -53,7 +53,7 @@ public class PreGrace {
                     if (secondsLeft > 0) {
                         for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
                             onlinePlayers.sendTitle(ChatColor.GREEN + "Starting in " + secondsLeft, "", 10, 20, 10);
-                            onlinePlayers.playSound(onlinePlayers.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                            onlinePlayers.playSound(onlinePlayers.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1.0f, 1.0f);
                         }
                         secondsLeft--;
                     } else {
@@ -66,14 +66,16 @@ public class PreGrace {
                         startBread.setAmount(16);
 
                         for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
-                            onlinePlayers.sendTitle(ChatColor.GREEN + "Have fun :) ", "", 10, 50, 10);
-                            onlinePlayers.setGameMode(GameMode.SURVIVAL);
-                            onlinePlayers.setHealth(20);
-                            onlinePlayers.setFoodLevel(20);
-                            onlinePlayers.setExp(0);
-                            onlinePlayers.getInventory().clear();
-                            onlinePlayers.getInventory().addItem(startBread);
-                            onlinePlayers.playSound(onlinePlayers.getLocation(), Sound.BLOCK_END_PORTAL_SPAWN, 1.0f, 1.0f);
+                            if (game.getStarting().getAlivePlayers().contains(onlinePlayers)) {
+                                onlinePlayers.sendTitle(ChatColor.GREEN + "Have fun :) ", "", 10, 50, 10);
+                                onlinePlayers.setGameMode(GameMode.SURVIVAL);
+                                onlinePlayers.setHealth(20);
+                                onlinePlayers.setFoodLevel(20);
+                                onlinePlayers.setExp(0);
+                                onlinePlayers.getInventory().clear();
+                                onlinePlayers.getInventory().addItem(startBread);
+                                onlinePlayers.playSound(onlinePlayers.getLocation(), Sound.BLOCK_END_PORTAL_SPAWN, 1.0f, 1.0f);
+                            }
                         }
                         game.getScoreboardSidebar().startSidebarUpdateTask();
                         game.startGracePeriod();

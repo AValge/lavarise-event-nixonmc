@@ -46,11 +46,11 @@ public class ForceStop {
             } else {
                 plugin.getLogger().info("Could not find a bossbar. Plugin did not remove anything (This is not a bug)!");
             }
-
         }
 
         Location randomLocation = game.getMapManager().getRandomLocation();
         game.getGameBorder().removeWorldBorder(randomLocation);
+        game.getStarting().getOngoingGamelocation().clear();
 
         if (randomLocation != null) {
             game.getGameBorder().removeWorldBorder(randomLocation);
