@@ -16,51 +16,35 @@ public class Holograms {
 
     private final JavaPlugin plugin;
     private final List<TextDisplay> lavaHolograms;
+    private final World world;
 
     public Holograms(JavaPlugin plugin) {
         this.plugin = plugin;
         this.lavaHolograms = new ArrayList<>();
+        this.world = Bukkit.getWorld("world");
     }
 
-    public void DisplayLavaHolograms() {
-        World world = Bukkit.getWorld("world");
+    public void displayLavaHolograms() {
+        if (world == null) {
+            plugin.getLogger().severe("World 'world' not found!");
+            return;
+        }
 
         String welcomeString = ChatColor.YELLOW + ChatColor.BOLD.toString() + "≫ Welcome to Lava Rising! ≪";
-        String bugInfoString = ChatColor.YELLOW + ChatColor.BOLD.toString() + "≫ Welcome to Lava Rising! ≪\n" +
-                ChatColor.RED + ChatColor.BOLD + "Lava Rising may currently have bugs!\n" +
-                ChatColor.RED + ChatColor.BOLD + "Please report any bug you find to staff.\n" +
-                ChatColor.RED + ChatColor.BOLD + "Thank you for your patience!";
+        addHologram(new Location(world, -22.500, 88.350, -16.500), welcomeString);
+        addHologram(new Location(world, -14.500, 88.800, -0.500), welcomeString);
+        addHologram(new Location(world, -14.500, 88.800, -33.500), welcomeString);
+    }
 
-        Location hologramLoc1 = new Location(Bukkit.getWorld("world"), -22.500, 88.350, -16.500); assert world != null;
-        TextDisplay informationHologram1 = (TextDisplay) world.spawnEntity((hologramLoc1), EntityType.TEXT_DISPLAY);
-        informationHologram1.setText(bugInfoString);
-        informationHologram1.setShadowed(true);
-        informationHologram1.setBillboard(Display.Billboard.VERTICAL);
-        informationHologram1.setViewRange(100);
-        informationHologram1.setBrightness(new Display.Brightness(14, 14));
-        informationHologram1.setBackgroundColor(org.bukkit.Color.fromARGB(0, 0, 0, 0));
-
-        Location hologramLoc2 = new Location(Bukkit.getWorld("world"), -14.500, 88.800, -0.500); assert world != null;
-        TextDisplay welcomeHologram1 = (TextDisplay) world.spawnEntity((hologramLoc2), EntityType.TEXT_DISPLAY);
-        welcomeHologram1.setText(welcomeString);
-        welcomeHologram1.setShadowed(true);
-        welcomeHologram1.setBillboard(Display.Billboard.VERTICAL);
-        welcomeHologram1.setViewRange(100);
-        welcomeHologram1.setBrightness(new Display.Brightness(14, 14));
-        welcomeHologram1.setBackgroundColor(org.bukkit.Color.fromARGB(0, 0, 0, 0));
-
-        Location hologramLoc3 = new Location(Bukkit.getWorld("world"), -14.500, 88.800, -33.500); assert world != null;
-        TextDisplay welcomeHologram2 = (TextDisplay) world.spawnEntity((hologramLoc3), EntityType.TEXT_DISPLAY);
-        welcomeHologram2.setText(welcomeString);
-        welcomeHologram2.setShadowed(true);
-        welcomeHologram2.setBillboard(Display.Billboard.VERTICAL);
-        welcomeHologram2.setViewRange(100);
-        welcomeHologram2.setBrightness(new Display.Brightness(14, 14));
-        welcomeHologram2.setBackgroundColor(org.bukkit.Color.fromARGB(0, 0, 0, 0));
-
-        lavaHolograms.add(informationHologram1);
-        lavaHolograms.add(welcomeHologram1);
-        lavaHolograms.add(welcomeHologram2);
+    private void addHologram(Location location, String text) {
+        TextDisplay hologram = (TextDisplay) world.spawnEntity(location, EntityType.TEXT_DISPLAY);
+        hologram.setText(text);
+        hologram.setShadowed(true);
+        hologram.setBillboard(Display.Billboard.VERTICAL);
+        hologram.setViewRange(100);
+        hologram.setBrightness(new Display.Brightness(14, 14));
+        hologram.setBackgroundColor(org.bukkit.Color.fromARGB(0, 0, 0, 0));
+        lavaHolograms.add(hologram);
     }
 
     public void removeLavaHolograms() {
@@ -71,5 +55,4 @@ public class Holograms {
         }
         lavaHolograms.clear();
     }
-
 }

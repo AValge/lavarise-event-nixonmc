@@ -31,7 +31,7 @@ public final class LavariseEvent extends JavaPlugin {
 
     public void initialize() {
         holograms = new Holograms(this);
-        holograms.DisplayLavaHolograms();
+        holograms.displayLavaHolograms();
 
         mapManager = new MapManager(this);
         mapManager.loadConfigFile();

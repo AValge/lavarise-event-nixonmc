@@ -34,7 +34,7 @@ public class Ending {
             String winnerTitle = ChatColor.GREEN + winnerName + " has won the game!";
             String winnerSubtitle = ChatColor.GREEN + "Good game! :)";
             onlinePlayers.sendTitle(winnerTitle, winnerSubtitle, 10, 70, 20);
-            onlinePlayers.teleport(Locations.NIXON_EVENT_SPAWN);
+            onlinePlayers.teleport(Locations.LAVA_EVENT_SPAWN);
             onlinePlayers.setPlayerListName(ChatColor.GRAY + onlinePlayers.getName());
             onlinePlayers.setHealth(20);
             onlinePlayers.setFoodLevel(20);
@@ -58,9 +58,9 @@ public class Ending {
         }
 
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            winner.teleport(Locations.NIXON_EVENT_WINNER);
+            winner.teleport(Locations.LAVA_EVENT_WINNER);
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                winner.teleport(Locations.NIXON_EVENT_SPAWN);
+                winner.teleport(Locations.LAVA_EVENT_SPAWN);
             }, 300L);
         }, 1L);
 

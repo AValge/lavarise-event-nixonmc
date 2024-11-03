@@ -111,10 +111,10 @@ public class GameEvents implements Listener {
             player.setPlayerListName(ChatColor.RED + player.getName());
             player.setGameMode(GameMode.ADVENTURE);
             player.sendMessage(ChatColor.RED + "Game ongoing, wait until game is finished. Thank you for your patience!");
-            player.teleport(Locations.NIXON_EVENT_SPAWN);
+            player.teleport(Locations.LAVA_EVENT_SPAWN);
 
         } else if (currentState == GameState.ENDING || currentState == GameState.FORCESTOP || currentState == GameState.LOBBY) {
-            player.teleport(Locations.NIXON_EVENT_SPAWN);
+            player.teleport(Locations.LAVA_EVENT_SPAWN);
             player.getInventory().clear();
             player.setPlayerListName(ChatColor.GRAY + player.getName());
             player.setGameMode(GameMode.ADVENTURE);

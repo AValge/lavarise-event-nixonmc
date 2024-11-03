@@ -24,7 +24,7 @@ public class ForceStop {
         String stopSubtitle = ChatColor.RED + "Game cancelled!";
 
         for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
-            onlinePlayers.teleport(Locations.NIXON_EVENT_SPAWN);
+            onlinePlayers.teleport(Locations.LAVA_EVENT_SPAWN);
             onlinePlayers.setPlayerListName(ChatColor.GRAY + onlinePlayers.getName());
             onlinePlayers.sendTitle(stopTitle, stopSubtitle, 10, 70, 20);
             onlinePlayers.sendMessage(ChatColor.RED + "Lavarising has been cancelled!");
