@@ -31,7 +31,7 @@ public class Holograms {
         }
 
         String welcomeString = ChatColor.YELLOW + ChatColor.BOLD.toString() + "≫ Welcome to Lava Rising! ≪";
-        addHologram(new Location(world, -22.500, 88.350, -16.500), welcomeString);
+        addHologram(new Location(world, -22.500, 88.800, -16.500), welcomeString);
         addHologram(new Location(world, -14.500, 88.800, -0.500), welcomeString);
         addHologram(new Location(world, -14.500, 88.800, -33.500), welcomeString);
     }

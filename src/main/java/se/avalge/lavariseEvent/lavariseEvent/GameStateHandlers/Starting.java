@@ -16,11 +16,13 @@ public class Starting {
     private final LavariseEvent plugin;
     private final Game game;
     private final List<Player> alivePlayers;
+    private final List<Location> ongoingGamelocation;
 
     public Starting(LavariseEvent plugin, Game game) {
         this.plugin = plugin;
         this.game = game;
         this.alivePlayers = new ArrayList<>();
+        this.ongoingGamelocation = new ArrayList<>();
     }
 
     // Method to start the game
@@ -74,6 +76,9 @@ public class Starting {
                     secondsLeft--;
                 } else {
                     this.cancel();
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mvgamerule doImmediateRespawn true lavarising");
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mvgamerule doDaylightCycle false lavarising");
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mvgamerule doWeatherCycle false lavarising");
                     startSequence3();
                 }
             }
@@ -84,6 +89,7 @@ public class Starting {
     public void startSequence3() {
         Location randomLocation = game.getMapManager().getRandomLocation();
 
+        ongoingGamelocation.add(randomLocation);
         GameBorder.setWorldBorder(randomLocation);
 
         Bukkit.getScheduler().runTask(plugin, () -> new BukkitRunnable() {
@@ -120,4 +126,5 @@ public class Starting {
     public List<Player> getAlivePlayers() {
         return alivePlayers;
     }
+    public List<Location> getOngoingGamelocation() { return ongoingGamelocation; }
 }

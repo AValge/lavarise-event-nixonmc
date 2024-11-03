@@ -14,7 +14,6 @@ public final class LavariseEvent extends JavaPlugin {
 
     private MapManager mapManager;
     private Game game;
-
     private Holograms holograms;
 
     @Override

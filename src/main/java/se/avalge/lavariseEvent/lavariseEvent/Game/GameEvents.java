@@ -108,10 +108,12 @@ public class GameEvents implements Listener {
             player.setGameMode(GameMode.ADVENTURE);
 
         } else if (currentState == GameState.PRE_GRACE || currentState == GameState.GRACE || currentState == GameState.LAVA) {
+            Location loc = game.getStarting().getOngoingGamelocation().get(0);
+
             player.setPlayerListName(ChatColor.RED + player.getName());
-            player.setGameMode(GameMode.ADVENTURE);
+            player.setGameMode(GameMode.SPECTATOR);
             player.sendMessage(ChatColor.RED + "Game ongoing, wait until game is finished. Thank you for your patience!");
-            player.teleport(Locations.LAVA_EVENT_SPAWN);
+            player.teleport(loc);
 
         } else if (currentState == GameState.ENDING || currentState == GameState.FORCESTOP || currentState == GameState.LOBBY) {
             player.teleport(Locations.LAVA_EVENT_SPAWN);
