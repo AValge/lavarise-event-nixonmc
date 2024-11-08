@@ -104,7 +104,6 @@ public class GameEvents implements Listener {
 
         GameState currentState = game.getGameStateManager().getCurrentState();
 
-            // STARTING
         if (currentState == GameState.STARTING) {
             game.getStarting().getAlivePlayers().add(player);
             player.setPlayerListName(ChatColor.GREEN + player.getName());
@@ -113,55 +112,15 @@ public class GameEvents implements Listener {
                 player.setGameMode(GameMode.ADVENTURE);
             }, 1L);
 
-            // PREGRACE
-        } else if (currentState == GameState.PRE_GRACE) {
-            Location ongoingLocation = game.getStarting().getOngoingGamelocation().get(0);
-
-            Location highestBlockLocation = ongoingLocation.getWorld().getHighestBlockAt(ongoingLocation).getLocation().add(0, 1, 0);
-
+        } else if (currentState == GameState.PRE_GRACE || currentState == GameState.GRACE || currentState == GameState.LAVA) {
             player.setPlayerListName(ChatColor.RED + player.getName());
             player.sendMessage(ChatColor.RED + "Game ongoing. Wait until the game is finished!");
-            player.teleport(highestBlockLocation);
-
+            player.teleport(Locations.LAVA_EVENT_SPAWN);
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                player.setGameMode(GameMode.SPECTATOR);
+                player.setGameMode(GameMode.ADVENTURE);
             }, 1L);
-        }
+            player.getInventory().clear();
 
-            // GRACE
-        else if (currentState == GameState.GRACE) {
-            Location ongoingLocation = game.getStarting().getOngoingGamelocation().get(0);
-
-            Location highestBlockLocation = ongoingLocation.getWorld().getHighestBlockAt(ongoingLocation).getLocation().add(0, 1, 0);
-
-            player.setPlayerListName(ChatColor.RED + player.getName());
-            player.sendMessage(ChatColor.RED + "Game ongoing. Wait until the game is finished!");
-            player.teleport(highestBlockLocation);
-
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                player.setGameMode(GameMode.SPECTATOR);
-            }, 1L);
-
-            addPlayerToBossBar(game.getGrace().getCountdownBossBar(), player);
-
-            // LAVA
-        } else if (currentState == GameState.LAVA) {
-
-            Location ongoingLocation = game.getStarting().getOngoingGamelocation().get(0);
-
-            Location highestBlockLocation = ongoingLocation.getWorld().getHighestBlockAt(ongoingLocation).getLocation().add(0, 1, 0);
-
-            player.setPlayerListName(ChatColor.RED + player.getName());
-            player.sendMessage(ChatColor.RED + "Game ongoing. Wait until the game is finished!");
-            player.teleport(highestBlockLocation);
-
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                player.setGameMode(GameMode.SPECTATOR);
-            }, 1L);
-
-            addPlayerToBossBar(game.getLava().getIntervalBossBar(), player);
-
-        // ENDING && FORCESTOP && LOBBY
         } else if (currentState == GameState.ENDING || currentState == GameState.FORCESTOP || currentState == GameState.LOBBY) {
             player.teleport(Locations.LAVA_EVENT_SPAWN);
             player.getInventory().clear();

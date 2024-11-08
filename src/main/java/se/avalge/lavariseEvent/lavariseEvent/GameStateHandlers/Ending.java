@@ -66,6 +66,5 @@ public class Ending {
 
         Location randomLocation = game.getMapManager().getRandomLocation();
         game.getGameBorder().removeWorldBorder(randomLocation);
-        game.getStarting().getOngoingGamelocation().clear();
     }
 }

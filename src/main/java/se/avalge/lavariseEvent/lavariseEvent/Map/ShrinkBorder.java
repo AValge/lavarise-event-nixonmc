@@ -21,7 +21,7 @@ public class ShrinkBorder {
             onlinePlayers.sendMessage(ChatColor.RED + "Worldborder will now start to shrink. Watch out!");
         }
 
-        Bukkit.getScheduler().runTaskLater(plugin, () -> shrinkWorldborder(3, 200), 30L);
+        Bukkit.getScheduler().runTaskLater(plugin, () -> shrinkWorldborder(3, 180), 30L);
     }
 
     public void shrinkWorldborder(int size, int duration) {
