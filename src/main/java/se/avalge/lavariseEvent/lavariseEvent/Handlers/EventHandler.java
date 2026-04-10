@@ -21,6 +21,6 @@ public class EventHandler {
         Bukkit.getPluginManager().registerEvents(new MenuCommand(game), plugin);
         Bukkit.getPluginManager().registerEvents(game.getGameEvents(), plugin);
         Bukkit.getPluginManager().registerEvents(game.getScoreboardSidebar(), plugin);
-        Bukkit.getPluginManager().registerEvents(new Grace(plugin, game), plugin);
+        Bukkit.getPluginManager().registerEvents(game.getGrace(), plugin);
     }
 }

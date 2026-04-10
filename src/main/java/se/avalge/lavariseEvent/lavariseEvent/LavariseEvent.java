@@ -25,7 +25,7 @@ public final class LavariseEvent extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        removeHolograms();
+        holograms.removeLavaHolograms();
     }
 
     public void initialize() {
@@ -37,7 +37,7 @@ public final class LavariseEvent extends JavaPlugin {
 
         game = new Game(this, mapManager);
 
-        CommandHandler commandHandler = new CommandHandler(this, mapManager);
+        CommandHandler commandHandler = new CommandHandler(this, mapManager, game);
         commandHandler.handleCommands();
         EventHandler eventHandler = new EventHandler(this, game);
         eventHandler.registerEvents();
@@ -52,12 +52,5 @@ public final class LavariseEvent extends JavaPlugin {
         World world = Bukkit.createWorld(new WorldCreator(worldName));
 
         world.setAutoSave(false);
-    }
-
-    public void removeHolograms() {
-        holograms.removeLavaHolograms();
-        if (holograms != null) {
-            holograms.removeLavaHolograms();
-        }
     }
 }

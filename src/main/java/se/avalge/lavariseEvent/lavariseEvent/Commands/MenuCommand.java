@@ -29,7 +29,7 @@ public class MenuCommand implements CommandExecutor, Listener {
         if (sender instanceof Player) {
             Player player = (Player) sender;
 
-            Inventory lavaisrisingmenu = Bukkit.createInventory(player, 27, "Lava Rising Menu");
+            Inventory lavaisrisingmenu = Bukkit.createInventory(player, 27, ChatColor.RED + "Lava Rising Menu");
 
             ItemStack startButton = new ItemStack(Material.LIME_DYE);
             ItemMeta meta1 = startButton.getItemMeta();
@@ -54,12 +54,17 @@ public class MenuCommand implements CommandExecutor, Listener {
 
     @EventHandler
     public void onMenuClick(InventoryClickEvent event) {
-        if (ChatColor.translateAlternateColorCodes('&', event.getView().getTitle()).equals("Lava Rising Menu")
+        if (ChatColor.translateAlternateColorCodes('&', event.getView().getTitle()).equals(ChatColor.RED + "Lava Rising Menu")
                 && event.getCurrentItem() != null) {
             event.setCancelled(true);
 
             Player player = (Player) event.getWhoClicked();
-            ItemStack clickedItem = event.getCurrentItem();
+
+            if (!player.hasPermission("lavarise.menu")) {
+                player.sendMessage(ChatColor.RED + "You don't have permission to use this.");
+                player.closeInventory();
+                return;
+            }
 
             switch (event.getRawSlot()) {
                 case 12:

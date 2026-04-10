@@ -52,8 +52,11 @@ public class MapManager {
     }
 
     public Location getRandomLocation() {
+        if (locations.isEmpty()) {
+            plugin.getLogger().severe("No locations are configured in config.yml! Add at least one.");
+            return null;
+        }
         Random random = new Random();
-        int randomIndex = random.nextInt(locations.size());
-        return locations.get(randomIndex);
+        return locations.get(random.nextInt(locations.size()));
     }
 }

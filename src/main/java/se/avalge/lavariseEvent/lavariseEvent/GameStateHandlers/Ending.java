@@ -42,6 +42,7 @@ public class Ending {
             onlinePlayers.getInventory().clear();
             onlinePlayers.setGameMode(GameMode.ADVENTURE);
             onlinePlayers.playSound(onlinePlayers.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
+            onlinePlayers.playSound(onlinePlayers.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.0f, 1.0f);
             onlinePlayers.sendMessage(ChatColor.GREEN + winnerName + " has won the game, GG!");
 
             if (game.getGrace().getCountdownBossBar() != null) {

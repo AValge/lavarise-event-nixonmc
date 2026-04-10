@@ -55,5 +55,7 @@ public class ShrinkBorder {
                 }
             }
         }.runTaskTimer(plugin, 0, 20));
+
+
     }
 }

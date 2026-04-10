@@ -33,6 +33,7 @@ public class ScoreboardSidebar implements Listener {
     }
 
     public void startSidebarUpdateTask() {
+        resetPvPTimer();
         BukkitTask updateTask = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
             if (timeRemaining > 0 && !game.getGameEvents().isPvPEnabled()) {
                 timeRemaining--;
@@ -70,8 +71,6 @@ public class ScoreboardSidebar implements Listener {
         Objective obj = board.registerNewObjective("playerboard", "dummy",
                 ChatColor.YELLOW + ChatColor.BOLD.toString() + "≪ Lavarising Event ≫");
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-
-        resetPvPTimer();
 
         player.setScoreboard(board);
         playersWithSidebar.add(player);

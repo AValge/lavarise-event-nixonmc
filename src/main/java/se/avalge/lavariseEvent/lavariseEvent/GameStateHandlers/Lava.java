@@ -52,8 +52,6 @@ public class Lava {
     }
 
     public void startRising() {
-        game.getLava().resetCurrentLavaY();
-
         // Interval for lava rising (in seconds)
         long lavaRiseInterval = 3L;
         this.lavaFillTask = plugin.getServer().getScheduler().runTaskTimer(

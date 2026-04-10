@@ -64,16 +64,13 @@ public class GameEvents implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         String worldName = event.getPlayer().getWorld().getName();
-        if (!worldName.equals("lavarising")) {
-            return;
-        }
-        GameStateManager gameStateManager = plugin.getGame().getGameStateManager();
-        if (gameStateManager.isInState(GameState.PRE_GRACE)) {
-            if(event.getTo().getBlockX() > event.getFrom().getBlockX() ||
-               event.getTo().getBlockX() < event.getFrom().getBlockX() ||
-               event.getTo().getBlockZ() > event.getFrom().getBlockZ() ||
-               event.getTo().getBlockZ() < event.getFrom().getBlockZ()) {
-               event.getPlayer().teleport(event.getFrom());
+        if (!worldName.equals("lavarising")) return;
+
+        if (game.getGameStateManager().isInState(GameState.PRE_GRACE)) {
+            // Compare exact X/Z, not block-rounded integers
+            if (event.getFrom().getX() != event.getTo().getX() ||
+                    event.getFrom().getZ() != event.getTo().getZ()) {
+                event.getPlayer().teleport(event.getFrom());
             }
         }
     }
@@ -135,29 +132,16 @@ public class GameEvents implements Listener {
     @EventHandler
     public void onPlayerLavaGameQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        String worldName = event.getPlayer().getWorld().getName();
+        String worldName = player.getWorld().getName();
 
-        if (worldName.equals("world") || worldName.equals("lavarising")) {
-            if (game.getGameStateManager().isInState(GameState.STARTING)) {
-                game.getStarting().getAlivePlayers().remove(player);
-                checkWinnerOnLeave();
-            }
-            if (game.getGameStateManager().isInState(GameState.PRE_GRACE)) {
-                game.getStarting().getAlivePlayers().remove(player);
-                checkWinnerOnLeave();
-            }
-            if (game.getGameStateManager().isInState(GameState.GRACE)) {
-                game.getStarting().getAlivePlayers().remove(player);
-                checkWinnerOnLeave();
-            }
-            if (game.getGameStateManager().isInState(GameState.LAVA)) {
-                game.getStarting().getAlivePlayers().remove(player);
-                checkWinnerOnLeave();
-            }
-            if (game.getGameStateManager().isInState(GameState.ENDING)) {
-                game.getStarting().getAlivePlayers().remove(player);
-                checkWinnerOnLeave();
-            }
+        if (!worldName.equals("world") && !worldName.equals("lavarising")) return;
+
+        GameState state = game.getGameStateManager().getCurrentState();
+        if (state == GameState.STARTING || state == GameState.PRE_GRACE ||
+                state == GameState.GRACE   || state == GameState.LAVA ||
+                state == GameState.ENDING) {
+            game.getStarting().getAlivePlayers().remove(player);
+            checkWinnerOnLeave();
         }
     }
 
@@ -167,13 +151,5 @@ public class GameEvents implements Listener {
                 game.endGame();
             }
         }, 20L);
-    }
-
-    private void addPlayerToBossBar(BossBar bossBar, Player player) {
-        if (bossBar != null) {
-            bossBar.addPlayer(player);
-        } else {
-            plugin.getLogger().info("Could not find a bossbar. Plugin did not add player (This is not a bug!§)");
-        }
     }
 }

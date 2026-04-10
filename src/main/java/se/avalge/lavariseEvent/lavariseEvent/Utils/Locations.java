@@ -17,5 +17,4 @@ public class Locations {
         LAVA_EVENT_SPAWN = new Location(eventWorld, -14.500, 87, -16.500, -90, 0);
         LAVA_EVENT_WINNER = new Location(eventWorld, -6.500, 89, -16.500);
     }
-
 }

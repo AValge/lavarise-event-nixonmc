@@ -87,6 +87,12 @@ public class Starting {
     public void startSequence3() {
         Location randomLocation = game.getMapManager().getRandomLocation();
 
+        if (randomLocation == null) {
+            plugin.getLogger().severe("Cannot start game: no locations configured.");
+            game.forceStop();
+            return;
+        }
+
         GameBorder.setWorldBorder(randomLocation);
 
         Bukkit.getScheduler().runTask(plugin, () -> new BukkitRunnable() {
